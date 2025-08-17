@@ -180,6 +180,7 @@ async function leaveMarket() {
         inMarket = false;
         boughtWorkerToday = false;
         dayStartTurn = game.turn;
+        savePersistance();
         await game.openMessage(`Day ${day}`);
     }
 }
@@ -390,13 +391,21 @@ const sprites = {
     `
 };
 
-
-const workers = [];
+let workers = [];
 const workerLimit = 4;
 let boughtWorkerToday = false;
 let dayStartTurn = 0;
 let inMarket = false;
-let lastDayMap;
+let lastDayMap = `
+    ........
+    ........
+    ........
+    ........
+    ........
+    ........
+    ........
+    ........
+`;
 let mapIndex = 0;
 let day = 1;
 let dailyProfit = 0;
@@ -490,7 +499,6 @@ const maps = [
 ];
 
 const game = odyc.createGame({
-title: ["Tomato Farmer", `Day ${day}`],
 background: 7,
     player: {
     /*x (empty) -> y (dry seed) -> z (watered seed) -> q (dry sprout) -> w (watered sprout) 
@@ -659,3 +667,53 @@ background: 7,
     },
     map: maps[mapIndex].sprite
 });
+
+
+async function checkPersistance() {
+    const choice = await game.prompt("New Game", "Continue");
+    if (choice === 0) {
+        localStorage.removeItem("eqLevels");
+        localStorage.removeItem("totalMoney");
+        localStorage.removeItem("day");
+        localStorage.removeItem("mapIndex");
+        localStorage.removeItem("lastDayMap");
+        localStorage.removeItem("workers");
+    } else {
+        const eqLevels = JSON.parse(localStorage.getItem("eqLevels"));
+        const savedTotalMoney = parseInt(localStorage.getItem("totalMoney"));
+        const savedDay = parseInt(localStorage.getItem("day"));
+        const savedMapIndex = parseInt(localStorage.getItem("mapIndex"));
+        const savedLastDayMap = localStorage.getItem("lastDayMap");
+        const savedWorkers =  JSON.parse(localStorage.getItem("workers"));
+        if (eqLevels) {
+            equipments.forEach((eq, i) => eq.level = eqLevels[i]);
+        }
+        totalMoney = savedTotalMoney ?? totalMoney;
+        day = savedDay ?? day;
+        mapIndex = savedMapIndex ?? mapIndex;
+        lastDayMap = savedLastDayMap ?? mapIndex;
+        workers = savedWorkers ?? workers;
+        game.loadMap(odyc.mergeSprites(maps[mapIndex].sprite, lastDayMap));
+        workers.forEach((worker, index) => {
+            const workerCell = maps[mapIndex].corners[index];
+            game.updateCellAt(...workerCell, {
+                sprite: odyc.mergeSprites(game.getCellAt(...workerCell).sprite, workerSprites[index])
+            });
+            worker.position = workerCell;
+            worker.direction = maps[mapIndex].dir[index];
+        });
+    }
+    await game.openMessage("Tomato Farmer");
+    await game.openMessage(`Day ${day}`);
+}
+
+function savePersistance() {
+    localStorage.setItem("eqLevels", JSON.stringify(equipments.map(eq => eq.level)));
+    localStorage.setItem("totalMoney", totalMoney);
+    localStorage.setItem("day", day);
+    localStorage.setItem("mapIndex", mapIndex);
+    localStorage.setItem("lastDayMap", lastDayMap);
+    localStorage.setItem("workers", JSON.stringify(workers));
+}
+
+checkPersistance();

@@ -688,20 +688,22 @@ async function checkPersistance() {
         if (eqLevels) {
             equipments.forEach((eq, i) => eq.level = eqLevels[i]);
         }
-        totalMoney = savedTotalMoney ?? totalMoney;
-        day = savedDay ?? day;
-        mapIndex = savedMapIndex ?? mapIndex;
-        lastDayMap = savedLastDayMap ?? mapIndex;
-        workers = savedWorkers ?? workers;
-        game.loadMap(odyc.mergeSprites(maps[mapIndex].sprite, lastDayMap));
-        workers.forEach((worker, index) => {
-            const workerCell = maps[mapIndex].corners[index];
-            game.updateCellAt(...workerCell, {
-                sprite: odyc.mergeSprites(game.getCellAt(...workerCell).sprite, workerSprites[index])
+        if (!isNaN(savedMapIndex) && savedLastDayMap !== null && savedWorkers) {
+            mapIndex = savedMapIndex;
+            lastDayMap = savedLastDayMap;
+            workers = savedWorkers;
+            game.loadMap(odyc.mergeSprites(maps[mapIndex].sprite, lastDayMap));
+            workers.forEach((worker, index) => {
+                const workerCell = maps[mapIndex].corners[index];
+                game.updateCellAt(...workerCell, {
+                    sprite: odyc.mergeSprites(game.getCellAt(...workerCell).sprite, workerSprites[index])
+                });
+                worker.position = workerCell;
+                worker.direction = maps[mapIndex].dir[index];
             });
-            worker.position = workerCell;
-            worker.direction = maps[mapIndex].dir[index];
-        });
+        }
+        totalMoney = isNaN(savedTotalMoney) ? totalMoney : savedTotalMoney;
+        day = isNaN(savedDay) ? day : savedDay;
     }
     await game.openMessage("Tomato Farmer");
     await game.openMessage(`Day ${day}`);

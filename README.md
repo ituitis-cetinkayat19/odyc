@@ -5,7 +5,7 @@ Odyc: https://odyc.dev/
 ## RPS
 
 Rock, paper, scissors game with prompt.  
-Try the game [here](https://ituitis-cetinkayat19.github.io/odyc/rps)
+[Play RPS](https://ituitis-cetinkayat19.github.io/odyc/rps)
 <div>
     <img src="/images/rps/1.PNG" alt="RPS Image 1" width="600">
     <img src="/images/rps/2.PNG" alt="RPS Image 2" width="600">
@@ -14,7 +14,7 @@ Try the game [here](https://ituitis-cetinkayat19.github.io/odyc/rps)
 ## Volleyball Training
 
 Hit the incoming volleyballs by touching the volleyball where it lands. You can change difficulty and target score.  
-Try the game [here](https://ituitis-cetinkayat19.github.io/odyc/volleyball-training)
+[Play Volleyball Training](https://ituitis-cetinkayat19.github.io/odyc/volleyball-training)
 <div>
     <img src="/images/volleyball-training/1.PNG" alt="Volleyball Training Image 1" width="600">
     <img src="/images/volleyball-training/2.PNG" alt="Volleyball Training Image 2" width="600">
@@ -23,7 +23,7 @@ Try the game [here](https://ituitis-cetinkayat19.github.io/odyc/volleyball-train
 ## Tomato Farmer
 
 Grow tomatoes in your field. Fill your entire field using as few moves as possible.  
-Try the game [here](https://ituitis-cetinkayat19.github.io/odyc/tomato-farmer)
+[Play Tomato Farmer](https://ituitis-cetinkayat19.github.io/odyc/tomato-farmer)
 <div>
     <img src="/images/tomato-farmer/1.PNG" alt="Tomato Farmer Image 1" width="600">
     <img src="/images/tomato-farmer/2.PNG" alt="Tomato Farmer Image 2" width="600">
@@ -32,7 +32,7 @@ Try the game [here](https://ituitis-cetinkayat19.github.io/odyc/tomato-farmer)
 ## Tomato Farmer 2
 
 Farming tycoon game where you can expand your field, buy better equipment and hire workers.  
-Try the game [here](https://ituitis-cetinkayat19.github.io/odyc/tomato-farmer-2)
+[Play Tomato Farmer 2](https://ituitis-cetinkayat19.github.io/odyc/tomato-farmer-2)
 <div>
     <img src="/images/tomato-farmer-2/1.PNG" alt="Tomato Farmer 2 Image 1" width="600">
     <img src="/images/tomato-farmer-2/2.PNG" alt="Tomato Farmer 2 Image 2" width="600">
